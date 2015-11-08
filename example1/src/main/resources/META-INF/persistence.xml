@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd" version="1.0">
+
+    <!-- Tutorial "unit" -->
+    <persistence-unit name="Tutorial">
+        <provider>org.datanucleus.api.jpa.PersistenceProviderImpl</provider>
+        <class>eu.ubitech.samples.jpa.tutorial.Inventory</class>
+        <class>eu.ubitech.samples.jpa.tutorial.Product</class>
+        <class>eu.ubitech.samples.jpa.tutorial.Book</class>
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
+
+        <properties>
+            <property name="datanucleus.storeManagerType" value="rdbms"/>
+            <!--<property name="datanucleus.storeManagerType" value="rdbms"/>-->
+            <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/paasword1"/>
+            <property name="javax.persistence.jdbc.user" value="paasword1"/>
+            <property name="javax.persistence.jdbc.password" value="!paasword1!"/>
+
+            <property name="datanucleus.autoCreateTables" value="true"/>
+            <property name="datanucleus.autoCreateColumns" value="true"/>            
+            <property name="datanucleus.persistenceByReachabilityAtCommit" value="false"/>
+            <property name="datanucleus.manageRelationships" value="false"/>
+            <property name="datanucleus.manageRelationshipsChecks" value="false"/>
+            <property name="datanucleus.plugin.allowUserBundles" value="true"/>
+
+            <property name="datanucleus.connectionPoolingType" value="C3P0"/>
+            <property name="datanucleus.connectionPool.minPoolSize" value="5" />
+            <property name="datanucleus.connectionPool.initialPoolSize" value="5" />
+            <property name="datanucleus.connectionPool.maxPoolSize" value="20" />
+            <property name="datanucleus.connectionPool.maxStatements" value="50" />
+            <property name="datanucleus.autoCreateSchema" value="false"/>
+
+        </properties>
+    </persistence-unit>
+
+</persistence>

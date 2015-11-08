@@ -1,0 +1,209 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>eu.paasword.samples</groupId>
+    <artifactId>example1</artifactId>
+    <packaging>jar</packaging>
+    <version>3.2</version>
+    <name>Example 1: Usage of Native Datanucleus</name>
+
+
+    <properties>
+        <encoding>UTF-8</encoding>
+        <maven.compiler.source>1.7</maven.compiler.source>
+        <maven.compiler.target>1.7</maven.compiler.target>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.datanucleus</groupId>
+            <artifactId>datanucleus-core</artifactId>
+            <!--<version>(3.1.99, 3.2.99)</version>-->
+            <version>3.2.4</version>
+        </dependency>
+        <dependency>
+            <groupId>org.datanucleus</groupId>
+            <artifactId>datanucleus-api-jpa</artifactId>
+            <!--<version>(3.1.99, 3.2.99)</version>-->
+            <version>3.2.3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.datanucleus</groupId>
+            <artifactId>datanucleus-api-jdo</artifactId>
+            <version>3.2.3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.datanucleus</groupId>
+            <artifactId>javax.persistence</artifactId>
+            <version>2.1.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.datanucleus</groupId>
+            <artifactId>datanucleus-enhancer</artifactId>
+            <version>3.1.1</version>
+        </dependency>
+        <!-- ENABLE THIS FOR MYSQL -->
+        <dependency>
+            <groupId>org.datanucleus</groupId>
+            <artifactId>datanucleus-rdbms</artifactId>
+            <version>3.2.3</version>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.36</version>
+        </dependency>
+        <!-- ================================================================================ -->
+
+        <dependency>
+            <groupId>c3p0</groupId>
+            <artifactId>c3p0</artifactId>
+            <version>0.9.1.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.geronimo.specs</groupId>
+            <artifactId>geronimo-jpa_2.0_spec</artifactId>
+            <version>1.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.jdo</groupId>
+            <artifactId>jdo-api</artifactId>
+            <version>[3.0, )</version>
+        </dependency>
+
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>[1.2, 1.3)</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.12</version>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+        </dependency>
+	
+    </dependencies>
+
+    <build>
+        <resources>
+            <resource>
+                <directory>${basedir}/src/main/resources</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>${basedir}</directory>
+                <includes>
+                    <include>log4j.properties</include>
+                </includes>
+            </resource>
+        </resources>
+        <plugins>
+            <plugin>
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>2.4.1</version>
+                <configuration>
+                    <filesets>
+                        <fileset>
+                            <directory>${basedir}</directory>
+                            <includes>
+                                <include>*.log</include>
+                                <include>testDB</include>
+                                <include>tutorial.xls</include>
+                                <include>tutorial.ods</include>
+                                <include>tutorial.ooxml</include>
+                                <include>tutorial.xml</include>
+                            </includes>
+                        </fileset>
+                    </filesets>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.3.2</version>
+            </plugin>
+            
+            <!--   Enhancement Process -->
+            <plugin>
+                <groupId>org.datanucleus</groupId>
+                <artifactId>datanucleus-maven-plugin</artifactId>
+                <version>3.2.0-m2</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.datanucleus</groupId>
+                        <artifactId>datanucleus-core</artifactId>
+                        <version>3.2.4</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.datanucleus</groupId>
+                        <artifactId>datanucleus-rdbms</artifactId>
+                        <version>3.2.3</version>
+                    </dependency>
+                </dependencies>
+                <configuration>
+                    <api>JPA</api>
+                    <persistenceUnitName>Tutorial</persistenceUnitName>
+                    <log4jConfiguration>${basedir}/log4j.properties</log4jConfiguration>
+                    <verbose>true</verbose>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>enhance</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.1</version>
+                <configuration>
+                    <mainClass>eu.ubitech.samples.jpa.tutorial.Main</mainClass>
+                    <systemProperties>
+                        <systemProperty>
+                            <key>log4j.configuration</key>
+                            <value>file:${basedir}/log4j.properties</value>
+                        </systemProperty>
+                    </systemProperties>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>2.2.1</version>
+                <configuration>
+                    <descriptors>
+                        <descriptor>${basedir}/assembly.xml</descriptor>
+                    </descriptors>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+    
+
+    <repositories>
+	    <repository>
+            <id>DN_M2_Repo</id>
+            <name>DataNucleus Repository</name>
+            <url>http://www.datanucleus.org/downloads/maven2</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>    
+    
+</project>
