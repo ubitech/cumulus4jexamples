@@ -40,67 +40,14 @@ public class Main {
         // Perform some query operations
         // Comparison operators
         performQeryUsingComparisonOperators(em, emf, tx, keyboard);
-        //
-        performARetrieveOfTheInventoryAndDetach(em, emf, tx, keyboard);
 
         // Arithmetic operators
-        em = emf.createEntityManager();
-        setEncryptionCoordinates(em);
-        tx = em.getTransaction();
-        try {
-            tx.begin();
-            System.out.println("Executing Update Query for a Book's price");
-            Query q = em.createQuery("UPDATE Book b SET b.price = 300 WHERE b.name = :name").setParameter("name", "Salamander");
-            int numRowsUpdated = q.executeUpdate();
-            System.out.println(">  Update was executed: " + numRowsUpdated);
-
-            tx.commit();
-
-        }
-        finally {
-            if (tx.isActive()) {
-                tx.rollback();
-
-            }
-            em.close();
-
-        }
-        System.out.println("");
-        System.out.println("press enter to continue");
-        keyboard.nextLine();
-
-        em = emf.createEntityManager();
-        setEncryptionCoordinates(em);
-        tx = em.getTransaction();
-        try {
-            tx.begin();
-            System.out.println("Executing Update Query for NULL values in Books");
-            Query q = em.createQuery("UPDATE Book b SET b.author = 'Mpamias' WHERE b.name IS NULL");
-            int numRowsUpdated = q.executeUpdate();
-            System.out.println(">  Update was executed: " + numRowsUpdated);
-
-            tx.commit();
-
-        }
-        finally {
-            if (tx.isActive()) {
-                tx.rollback();
-
-            }
-            em.close();
-
-        }
-        System.out.println("");
-        System.out.println("press enter to continue");
-        keyboard.nextLine();
+        performQeryUsingArithmeticOperators(em, emf, tx, keyboard);
         //
         performARetrieveOfTheInventoryAndDetach(em, emf, tx, keyboard);
 
-        // Logical operators
-        //
-
         // Clean out the database
-        //performCleanOutOfTheDatabase(inv, em, emf, tx, keyboard);
+        performCleanOutOfTheDatabase(inv, em, emf, tx, keyboard);
 
         System.out.println("");
         System.out.println("End of Tutorial");
@@ -507,7 +454,55 @@ public class Main {
     }
 
     public static void performQeryUsingArithmeticOperators(EntityManager em, EntityManagerFactory emf, EntityTransaction tx, Scanner keyboard) {
+        em = emf.createEntityManager();
+        setEncryptionCoordinates(em);
+        tx = em.getTransaction();
+        try {
+            tx.begin();
+            System.out.println("Executing Update Query for a Book's price");
+            Query q = em.createQuery("UPDATE Book b SET b.price = 300 WHERE b.name = :name").setParameter("name", "Salamander");
+            int numRowsUpdated = q.executeUpdate();
+            System.out.println(">  Update was executed: " + numRowsUpdated);
 
+            tx.commit();
+
+        }
+        finally {
+            if (tx.isActive()) {
+                tx.rollback();
+
+            }
+            em.close();
+
+        }
+        System.out.println("");
+        System.out.println("press enter to continue");
+        keyboard.nextLine();
+
+        em = emf.createEntityManager();
+        setEncryptionCoordinates(em);
+        tx = em.getTransaction();
+        try {
+            tx.begin();
+            System.out.println("Executing Update Query for NULL values in Books");
+            Query q = em.createQuery("UPDATE Book b SET b.author = 'Mpamias' WHERE b.name IS NULL");
+            int numRowsUpdated = q.executeUpdate();
+            System.out.println(">  Update was executed: " + numRowsUpdated);
+
+            tx.commit();
+
+        }
+        finally {
+            if (tx.isActive()) {
+                tx.rollback();
+
+            }
+            em.close();
+
+        }
+        System.out.println("");
+        System.out.println("press enter to continue");
+        keyboard.nextLine();
 
     }
 

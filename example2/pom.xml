@@ -93,12 +93,6 @@
         </dependency>
 	
         <!-- ============================= Cumulus4J =================================================== -->
-
-        <dependency>
-            <groupId>org.cumulus4j</groupId>
-            <artifactId>org.cumulus4j.store.test</artifactId> <!-- need some framework stuff -->
-            <version>1.2.1</version>
-        </dependency>
         <dependency>
             <groupId>org.cumulus4j</groupId>
             <artifactId>org.cumulus4j.annotation</artifactId>

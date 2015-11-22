@@ -16,8 +16,8 @@
             <!--<property name="datanucleus.storeManagerType" value="rdbms"/>-->
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/paasword2"/>
-            <property name="javax.persistence.jdbc.user" value="paasword2"/>
-            <property name="javax.persistence.jdbc.password" value="!paasword2!"/>
+            <property name="javax.persistence.jdbc.user" value="paasword"/>
+            <property name="javax.persistence.jdbc.password" value="!paasword!"/>
 
             <property name="datanucleus.autoCreateTables" value="true"/>
             <property name="datanucleus.autoCreateColumns" value="true"/>            
