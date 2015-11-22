@@ -9,7 +9,7 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 
 /**
- * Created by lumi on 21/10/2015.
+ * Created by lumi (A.K.A. John Tsantilis) on 21/10/2015.
  * Definition of a Product
  * Represents a product, and contains the key aspects of the item.
  *

@@ -11,7 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 /**
- * Created by lumi on 21/10/2015.
+ * Created by lumi (A.K.A. John Tsantilis) on 21/10/2015.
  * Definition of an Inventory of products.
  */
 

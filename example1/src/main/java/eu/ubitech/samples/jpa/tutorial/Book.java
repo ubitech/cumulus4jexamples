@@ -5,7 +5,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 
 /**
- * Created by lumi on 21/10/2015.
+ * Created by lumi (A.K.A. John Tsantilis) on 21/10/2015.
  * Definition of a Book. Extends basic Product class.
  **/
 
